@@ -24,11 +24,9 @@ services:
         value: "5432"
       - key: DB_POSTGRESDB_DATABASE
         value: chatbotlogs
-      # CHANGED USERNAME BACK TO THE ONE FROM YOUR URL
       - key: DB_POSTGRESDB_USER
         value: chatbotlogs_user
       - key: DB_POSTGRESDB_PASSWORD
         value: SnoChxBdOP8PowQUESmIJ01Bkb1X8RXk
-      
-      - key: DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED
-        value: "false"
+      - key: DB_POSTGRESDB_SCHEMA
+        value: n8n_data
