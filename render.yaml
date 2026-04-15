@@ -35,14 +35,7 @@ services:
       - key: DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED
         value: "false"
 
-      # --- 3. THE FIX: BYPASS BROKEN MIGRATIONS ---
-      # This forces n8n to build brand new tables (e.g., n8n_workflow_entity)
-      # so it won't crash on the old, broken tables.
-      - key: DB_TABLE_PREFIX
-        value: "n8n_"
-
-      # --- 4. PERFORMANCE & MEMORY OPTIMIZATION ---
-      # Prevents memory crashes on Render's Free Tier
+      # --- 3. PERFORMANCE & MEMORY OPTIMIZATION ---
       - key: N8N_DEFAULT_BINARY_DATA_MODE
         value: "filesystem"
       - key: EXECUTIONS_DATA_PRUNE
