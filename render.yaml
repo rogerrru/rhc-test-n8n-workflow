@@ -15,7 +15,7 @@ services:
       - key: N8N_PORT
         value: "5678"
 
-      # Database Configuration - Sharing with Chatbot Logs
+      # Database Configuration
       - key: DB_TYPE
         value: postgresdb
       - key: DB_POSTGRESDB_HOST
@@ -24,17 +24,11 @@ services:
         value: "5432"
       - key: DB_POSTGRESDB_DATABASE
         value: chatbotlogs
+      # CHANGED USERNAME BACK TO THE ONE FROM YOUR URL
       - key: DB_POSTGRESDB_USER
-        value: SnoChxBdOP8PowQUESmIJ01Bkb1X8RXk
+        value: chatbotlogs_user
       - key: DB_POSTGRESDB_PASSWORD
         value: SnoChxBdOP8PowQUESmIJ01Bkb1X8RXk
       
-      # Required for Render external connections
       - key: DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED
         value: "false"
-
-      # Recommended: Keep n8n logs light so your chat logs have room to grow
-      - key: EXECUTIONS_DATA_PRUNE
-        value: "true"
-      - key: EXECUTIONS_DATA_MAX_AGE
-        value: "72" # Prune n8n history after 3 days
