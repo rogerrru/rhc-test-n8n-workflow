@@ -7,15 +7,19 @@ services:
       url: docker.io/n8nio/n8n:latest
 
     envVars:
+      # --- 1. CORE SYSTEM & SECURITY ---
       - key: N8N_ENCRYPTION_KEY
         generateValue: true
-
       - key: PORT
         value: "5678"
       - key: N8N_PORT
         value: "5678"
+      
+      # Webhook URL must be updated in Render dashboard after deployment
+      - key: WEBHOOK_URL
+        sync: false 
 
-      # Database Configuration
+      # --- 2. DATABASE CONNECTION ---
       - key: DB_TYPE
         value: postgresdb
       - key: DB_POSTGRESDB_HOST
@@ -28,5 +32,20 @@ services:
         value: chatbotlogs_user
       - key: DB_POSTGRESDB_PASSWORD
         value: SnoChxBdOP8PowQUESmIJ01Bkb1X8RXk
-      - key: DB_POSTGRESDB_SCHEMA
-        value: n8n_data
+      - key: DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED
+        value: "false"
+
+      # --- 3. THE FIX: BYPASS BROKEN MIGRATIONS ---
+      # This forces n8n to build brand new tables (e.g., n8n_workflow_entity)
+      # so it won't crash on the old, broken tables.
+      - key: DB_TABLE_PREFIX
+        value: "n8n_"
+
+      # --- 4. PERFORMANCE & MEMORY OPTIMIZATION ---
+      # Prevents memory crashes on Render's Free Tier
+      - key: N8N_DEFAULT_BINARY_DATA_MODE
+        value: "filesystem"
+      - key: EXECUTIONS_DATA_PRUNE
+        value: "true"
+      - key: EXECUTIONS_DATA_MAX_AGE
+        value: "72"
